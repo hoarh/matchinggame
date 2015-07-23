@@ -1,6 +1,7 @@
-//define variables (figure out what you want to keep track of)
-var numMoves = 0;
-function isMatch(card1, card2) { //you could even write c1, c2; the order matters, not the content, since this is the declaration
+var numMoves=0;
+
+
+function isMatch(card1, card2) { 
 	if(card1 == card2) {
 		return true;
 	} else {
@@ -28,7 +29,7 @@ $(function() {
 					console.log("they are not a match");
 					$('.selected').removeClass('selected');//ask about how to make card flip over then flip back
 				}
-  		}
+  	}
 
   	//When all the cards are matched
 	if($('.matched').length == $('.cards').length) { //you could also say .length == 4, but this is more flexible
@@ -37,12 +38,23 @@ $(function() {
 		//reset the board by removing class "matched"
 		$('.matched').removeClass('matched');
 		//shuffle the cards
-		
-  	}
-
-  });
-
-
+		function shuffleCards(cards) {
+			var currentIndex = cards.length, temporaryValue, randomIndex;
+			while (0 !== currentIndex) {
+				randomIndex = Math.floor(Math.random() * currentIndex);
+				currentIndex -= 1;
+				temporaryValue = cards[currentIndex];
+				cards[currentIndex] = cards[randomIndex];
+				cards[randomIndex] = temporaryValue;
+			}
+			cards.each(function(index,card){
+				$("#game-cards").prepend(card);
+			});
+	
+			console.log("shuffled cards", cards);
+			return cards;
+  		}
+  	}	
 });
 
 
